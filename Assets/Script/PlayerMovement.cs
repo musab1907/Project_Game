@@ -1,44 +1,99 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public JoystickController joystickController;
-    public CharacterController characterController;
-    //public PlayerAnimator PlayerAnimator;
-    Vector3 moveVector;
-    public float moveSpeed = 5f; // Karakterin hareket hızı
+    public DynamicJoystick joystick;
+    public float moveSpeed = 5f;
+    public float runSpeedMultiplier = 2f;
+    public float threshold = 0.5f;
 
+    private Animator animator;
+    private Rigidbody rb;
+    private string currentAnimation;
 
-    // Start is called before the first frame update
     void Start()
     {
-        //character controller bileşenine erişim sağlamak için yazılan kod
-        characterController = GetComponent<CharacterController>();
-        joystickController = GetComponent<JoystickController>();
-        //PlayerAnimator=GetComponent<PlayerAnimator>();
+        rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        MovePlayer();
+        MoveCharacter(); 
+        PlayAnimation(); 
     }
 
-    public void MovePlayer()
+    void MoveCharacter()
     {
-        // hareket vektörü belirleme
-        moveVector = joystickController.GetMousePosition() * moveSpeed * Time.deltaTime / Screen.width;
+        float horizontal = joystick.Horizontal;
+        float vertical = joystick.Vertical;
 
+        Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 
-        //HAREKETİ ATAMA
-        moveVector.z = moveVector.y;
-        moveVector.y = 0;
-        characterController.Move(moveVector);
-        //PlayerAnimator.ManageAnimators(MoveVector);
+        float currentSpeed = moveSpeed;
+        if (direction.magnitude > threshold)
+        {
+            currentSpeed *= runSpeedMultiplier;
+        }
 
+        if (rb != null)
+        {
+            rb.MovePosition(transform.position + direction * currentSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(direction * currentSpeed * Time.deltaTime, Space.World);
+        }
 
+        if (direction.magnitude > 0.1f)
+        {
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
+    }
 
+    void PlayAnimation()
+    {
+        float joystickMagnitude = new Vector2(joystick.Horizontal, joystick.Vertical).magnitude;
+        string newAnimation;
+
+        if (joystickMagnitude > threshold)
+        {
+            newAnimation = "Run";
+        }
+        else if (joystickMagnitude > 0.01f)
+        {
+            newAnimation = "Walk";
+        }
+        else
+        {
+            newAnimation = "Idle";
+        }
+
+        if (newAnimation != currentAnimation)
+        {
+            float transitionTime = GetTransitionTime(currentAnimation, newAnimation);
+            currentAnimation = newAnimation;
+            animator.CrossFade(currentAnimation, transitionTime);
+        }
+    }
+
+    float GetTransitionTime(string from, string to)
+    {
+        if ((from == "Idle" && to == "Run") || (from == "Run" && to == "Idle"))
+        {
+            return 0.01f;
+        }
+
+        if ((from == "Walk" && to == "Run") || (from == "Run" && to == "Walk"))
+        {
+            return 0.2f;
+        }
+
+        if ((from == "Idle" && to == "Walk") || (from == "Walk" && to == "Idle"))
+        {
+            return 0.01f;
+        }
+
+        return 0.3f;
     }
 }
