@@ -234,6 +234,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character_Skeleton_01
       objectReference: {fileID: 0}
+    - target: {fileID: 197842, guid: fe1cffe6ed7a7ff4798b18c00b0358e3, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 407176, guid: fe1cffe6ed7a7ff4798b18c00b0358e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -294,6 +298,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 197842, guid: fe1cffe6ed7a7ff4798b18c00b0358e3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 353274928}
+    - targetCorrespondingSourceObject: {fileID: 197842, guid: fe1cffe6ed7a7ff4798b18c00b0358e3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 353274930}
   m_SourcePrefab: {fileID: 100100000, guid: fe1cffe6ed7a7ff4798b18c00b0358e3, type: 3}
 --- !u!1 &353274923 stripped
 GameObject:
@@ -367,6 +374,28 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   visualizeArea: 1
+  enemySee: 0
+--- !u!65 &353274930
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353274923}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.8186593, z: 1}
+  m_Center: {x: 0, y: 0.8441193, z: 0}
 --- !u!1 &507763068
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,6 +969,7 @@ GameObject:
   - component: {fileID: 1557790791}
   - component: {fileID: 1557790790}
   - component: {fileID: 1557790789}
+  - component: {fileID: 1557790793}
   m_Layer: 6
   m_Name: EnemyOne
   m_TagString: Untagged
@@ -1026,13 +1056,33 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557790788}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 12.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1557790793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557790788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e1e02b0c2a3447990cc4952fae0a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayDistance: 10
+  angleRange: 90
+  rayCount: 10
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  visualizeArea: 1
+  playerDetected: 0
 --- !u!1 &1766106293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,6 +1095,7 @@ GameObject:
   - component: {fileID: 1766106296}
   - component: {fileID: 1766106295}
   - component: {fileID: 1766106294}
+  - component: {fileID: 1766106298}
   m_Layer: 6
   m_Name: EnemyTwo
   m_TagString: Untagged
@@ -1138,6 +1189,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1766106298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766106293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e1e02b0c2a3447990cc4952fae0a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayDistance: 10
+  angleRange: 90
+  rayCount: 10
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  visualizeArea: 1
+  playerDetected: 0
 --- !u!1 &1786912541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,6 +1221,7 @@ GameObject:
   - component: {fileID: 1786912544}
   - component: {fileID: 1786912543}
   - component: {fileID: 1786912542}
+  - component: {fileID: 1786912546}
   m_Layer: 6
   m_Name: EnemyThree
   m_TagString: Untagged
@@ -1243,6 +1315,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1786912546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786912541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e1e02b0c2a3447990cc4952fae0a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayDistance: 10
+  angleRange: 90
+  rayCount: 10
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  visualizeArea: 1
+  playerDetected: 0
 --- !u!1 &1835928257
 GameObject:
   m_ObjectHideFlags: 0
