@@ -10,32 +10,40 @@ public class EnemyDetectorSystem : MonoBehaviour
 
     [Header("Visualization Settings")]
     public bool visualizeArea = true;
+    public bool enemySee;
 
     void Update()
     {
         DetectEnemiesInArea();
     }
 
-    void DetectEnemiesInArea()
+   void DetectEnemiesInArea()
+{
+    float halfAngle = angleRange / 2f;
+    float angleStep = angleRange / (rayCount - 1); 
+    bool detected = false; // Genel bir tespit kontrolü
+
+    for (int i = 0; i < rayCount; i++)
     {
-        float halfAngle = angleRange / 2f;
-        float angleStep = angleRange / (rayCount - 1); 
+        float currentAngle = -halfAngle + i * angleStep; 
+        Quaternion rayRotation = Quaternion.Euler(0, currentAngle, 0);
+        Vector3 rayDirection = rayRotation * transform.forward;
 
-        for (int i = 0; i < rayCount; i++)
+        Ray ray = new Ray(transform.position, rayDirection);
+        if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, enemyLayer))
         {
-            float currentAngle = -halfAngle + i * angleStep; 
-            Quaternion rayRotation = Quaternion.Euler(0, currentAngle, 0);
-            Vector3 rayDirection = rayRotation * transform.forward;
-
-            Ray ray = new Ray(transform.position, rayDirection);
-            if (Physics.Raycast(ray, out RaycastHit hit, rayDistance, enemyLayer))
-            {
-                Debug.Log("Düşman görüldü: " + hit.collider.name);
-            }
-
+            Debug.Log("Düşman görüldü: " + hit.collider.name);
+            detected = true; // Tespit edildiği için "true" yapılıyor
+            Debug.DrawRay(transform.position, rayDirection * rayDistance, Color.green);
+        }
+        else
+        {
             Debug.DrawRay(transform.position, rayDirection * rayDistance, Color.red);
         }
     }
+
+    enemySee = detected; // Döngü sonunda genel sonucu belirle
+}
 
     void OnDrawGizmos()
     {
