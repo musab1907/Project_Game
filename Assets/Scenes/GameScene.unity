@@ -1128,7 +1128,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Get only
+  m_Text: "Kazan\u0131lan"
 --- !u!222 &201755267
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2217,7 +2217,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Retry
+  m_Text: Tekrar
 --- !u!222 &389788652
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4280,7 +4280,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 738e55233b9517c44adaae438992e2fb, type: 3}
-    m_FontSize: 141
+    m_FontSize: 101
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -4291,7 +4291,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: FAIL!
+  m_Text: KAYBETTiN
 --- !u!222 &813595289
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5468,7 +5468,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: DRAG TO MOVE
+  m_Text: "HAREKET \u0130\xC7\u0130N S\xDCR\xDCKLE"
 --- !u!222 &1028824402
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5851,7 +5851,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1105269074
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5919,7 +5919,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: YOU
+  m_Text: SEN
 --- !u!222 &1105269077
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10289,7 +10289,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Next
+  m_Text: iLERi
 --- !u!222 &1780349522
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11435,7 +11435,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: COMPLETED
+  m_Text: TAMAMLANDI
 --- !u!222 &1954324020
 CanvasRenderer:
   m_ObjectHideFlags: 0
