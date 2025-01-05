@@ -64,7 +64,7 @@ public class FieldOfView : MonoBehaviour
             Vector3 dirToTarget = (target.position - transform.position).normalized;
             if (Vector3.Angle(transform.forward, dirToTarget) < ViewAngle / 2) {
                 float dstToTarget = Vector3.Distance(transform.position, target.position);
-                if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, ObstacleMask)) {
+                if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, ObstacleMask)) { //düşmana raycast atıp görme işlemleri burada atılıyor
                     if (ClosestTarget == null || dstToTarget < Vector3.Distance(transform.position, ClosestTarget.position)) {
                        
                         ClosestTarget = target;
@@ -111,15 +111,7 @@ public class FieldOfView : MonoBehaviour
                         Debug.Log("değillll");
                         ClosestTargetColliderFalse();;//1 saniye sonra CapsuleColliderı devreden çıkaran fonksiyonu çağırdım
                         }
-                        //ClosestTarget.gameObject.layer = 0;
-                        //yield return new WaitForSeconds(1f);
-                        //ClosestTarget.transform.DOScale(0,1);
-                        //ClosestTarget.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.DOComplete();
-                        //ClosestTarget.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material = GameManager.instance.friendMaterial;
-                        //ClosestTarget.transform.DOScale(0,1);
-                        //ClosestTarget.transform.LookAt(GameManager.instance.player.transform);
-                        //ClosestTarget.GetComponent<SkinnedMeshRenderer>().material.DOColor(Color.blue,1);
-                        //_soldier.SetTarget(ClosestTarget);
+                       
                     }
                 }
                 
@@ -153,26 +145,22 @@ public class FieldOfView : MonoBehaviour
     public async void ClosestTargetColliderFalse(){
 
         if(PlayerController.instance.playerMyHealth + 1 >= ClosestTarget.transform.GetComponent<EnemyMovement>().myHealth && ClosestTarget.transform.GetComponent<EnemyMovement>().myHealth <= 0 && GameObject.Find("EnemyBoss").transform.GetChild(0).gameObject.active == false){
-            //ClosestTarget.transform.position = GameManager.instance.player.transform.position;
-            //GameManager.instance.player.transform.DOScale(ClosestTarget.transform.localScale,1f);
-            //GameManager.instance.player.transform.DOPunchScale(ClosestTarget.transform.localScale,1);
-            //GameManager.instance.player.transform.DOShakeScale(1,ClosestTarget.transform.localScale,1);
+            
             Debug.Log("Come onnnn");
             GameManager.instance.upScalePartical.Play();
             GameManager.instance.player.transform.DOScale(ClosestTarget.transform.localScale,2f).SetEase(Ease.InOutBounce);
             ViewRadius += 2;
             ViewAngle += 5;
-            //GameManager.instance.player.transform.DORewind();
-            //GameManager.instance.player.transform.DOPunchScale(new Vector3(GameManager.instance.player.transform.localScale.x,GameManager.instance.player.transform.localScale.y,GameManager.instance.player.transform.localScale.z),1f);
+           
             PlayerController.instance.playerMyHealth++;
             ClosestTarget.gameObject.layer = 0;
             ClosestTarget.GetComponent<CapsuleCollider>().enabled = false;
-            //ClosestTarget.transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().material.DOColor(GameManager.instance.friendMaterial.color,3);
+            
             ClosestTarget.transform.GetChild(2).GetComponent<SkinnedMeshRenderer>().material = GameManager.instance.friendMaterial; 
-           //ClosestTarget.transform.GetChild(6).gameObject.transform.parent = null;
+     
             ClosestTarget.transform.GetChild(3).gameObject.SetActive(false);
             ClosestTarget.transform.GetChild(4).gameObject.SetActive(true);
-            //ClosestTarget.transform.GetChild(5).gameObject.SetActive(true);
+            
             ClosestTarget.transform.GetChild(6).gameObject.SetActive(true);
             ClosestTarget.transform.GetChild(7).gameObject.SetActive(true);
             ClosestTarget.transform.GetChild(8).gameObject.SetActive(true);
@@ -185,34 +173,29 @@ public class FieldOfView : MonoBehaviour
             ClosestTarget.transform.GetChild(5).gameObject.transform.parent = null;
             ClosestTarget.transform.GetChild(6).gameObject.transform.parent = null;
             ClosestTarget.transform.GetChild(7).gameObject.transform.parent = null;
-            //ClosestTarget.transform.GetChild(8).gameObject.transform.parent = null;
+           
             ClosestTarget.transform.GetChild(ClosestTarget.transform.childCount - 1).gameObject.transform.parent = null;
             ClosestTarget.transform.GetChild(ClosestTarget.transform.childCount - 2).gameObject.transform.parent = null;
-            //ClosestTarget.transform.GetChild(ClosestTarget.transform.childCount - 3).gameObject.transform.parent = null;
+         
             ClosestTarget.transform.DORotate(new Vector3(transform.rotation.x, transform.rotation.y - 720, transform.rotation.z), 0.7f, RotateMode.LocalAxisAdd);
-            //ClosestTarget.gameObject.SetActive(false);
-            //ClosestTarget.transform.parent = GameManager.instance.player.transform;
-            //Sonradan eklendirler
+           
             ClosestTarget.transform.GetComponent<EnemyMovement>().enabled = false;
             ClosestTarget.transform.GetComponent<NavMeshAgent>().enabled = false;
-            //ClosestTarget.transform.GetComponent<EnemyJoystickMovement>().enabled = false;
+           ;
             ClosestTarget.transform.GetComponent<EnemyRandomMovement>().enabled = false;
             ClosestTarget.transform.GetChild(0).gameObject.SetActive(true);
             ClosestTarget.transform.GetChild(0).parent = null;
             SliderBarSystem.instance.PositionUpY();
-            //ClosestTarget.transform.position = new Vector3(GameManager.instance.player.transform.position.x - 2,GameManager.instance.player.transform.position.y,GameManager.instance.player.transform.position.z -2);
-            //ClosestTarget.transform.rotation = GameManager.instance.player.transform.rotation;
+           
         }
 
      
-        //ClosestTarget.GetComponent<CapsuleCollider>().enabled = false;
-
-        //ClosestTarget.gameObject.layer = 0;//Düşmanın layerını değiştirdimki tekrar tekrar ateş etmesin
+       
 
     
         
         Debug.Log("bEN ÇAĞRILDIM");
-        //ClosestTarget.transform.parent = GameManager.instance.player.transform;//Childı yaptım lakin bu çok kötü oldu
+      
     }
     
 
@@ -234,6 +217,11 @@ public class FieldOfView : MonoBehaviour
         ClosestTarget.GetComponent<Animator>().SetBool("fail",true);
     }
 
+
+
+
+
+    //Çizim Hesaplama Fonksiyonu Raycast alanı
     private void DrawFOV() {
 		int stepCount = Mathf.RoundToInt(ViewAngle * MeshResolution);
 		float stepAngleSize = ViewAngle / stepCount;

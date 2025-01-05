@@ -35,12 +35,12 @@ public class EnemyMovement : MonoBehaviour
     private void FixedUpdate() {
         LookAtPlayerFunction();
         EnemyAnimationController();
-        //CharacterMovement();
+       
     }
     void Update()
     {
         EnemyLayerControlSystem();
-        //LookAtPlayerFunction();
+        
         TrianglePositionController();
     }
 
@@ -52,48 +52,32 @@ public class EnemyMovement : MonoBehaviour
 
     public void EnemyLayerControlSystem(){
         if(transform.GetComponent<EnemyMovement>().myHealth == 0){            
-            //transform.position = new Vector3(GameManager.instance.player.transform.position.x,GameManager.instance.player.transform.position.y,GameManager.instance.player.transform.position.z - 2);
-            //transform.DOScale(1.4f,1);
-            //GetComponent<Animator>().SetBool("fail",false);
-            //transform.LookAt(GameManager.instance.player.transform,Vector3.zero);
-
-            //transform.LookAt(GameManager.instance.player.transform);
-            
+          
             characterIsFriend = true;
         }
     }
 
     public void LookAtPlayerFunction(){
         if(gameObject.layer == 0){
-            //DOVirtual.DelayedCall(0.3f,LookPlayer);
+           
             LookPlayer();
             GetComponent<EnemyRandomMovement>().enabled = false;
-            //gameObject.GetComponent<NavMeshAgent>().speed = 15;
+           
         }
     }
 
     public void LookPlayer(){
            transform.LookAt(GameManager.instance.player.transform);
 
-           //transform.position = GameManager.instance.player.transform.localPosition;
+          
            
            transform.position = Vector3.MoveTowards(new Vector3(transform.position.x,transform.position.y,GameManager.instance.player.transform.localPosition.z - 2),GameManager.instance.player.transform.position,5 * Time.deltaTime);
-           //**Mathf.Clamp(transform.position.z,GameManager.instance.player.transform.position.z - 2, GameManager.instance.player.transform.position.z -5);
-
-           //GetComponent<CapsuleCollider>().enabled = true;
-
-           //GetComponent<NavMeshAgent>().SetDestination(GameManager.instance.player.transform.position);
-
-           //GetComponent<CapsuleCollider>().enabled = true;
-
-           //GetComponent<CapsuleCollider>().isTrigger = true;//Burası tekrardan eklenmeli
-
-           //GetComponent<Animator>().SetBool("fail",true);
+           
     }
 
     public void CharacterMovement(){
         if(gameObject.layer != 0){
-            //transform.Translate(Vector3.forward * followSpeed * Time.deltaTime);
+            
         }
     }
 
