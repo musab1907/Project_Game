@@ -18,8 +18,6 @@ public class FollowBoss : MonoBehaviour
         bossPosition.position = GameObject.Find("EnemyBoss").transform.GetChild(0).transform.position;
         
         if(agent != null && GameManager.instance.gameIsStarted == true ){//Eğer oyunun başla butonuna basıldıysa ve agent boş değilse bu işlemler yapılacal
-            //agent.speed = speed;
-            //agent.SetDestination(GameObject.Find("EnemyBoss").transform.GetChild(0).transform.position);
             gameObject.GetComponent<Animator>().SetBool("fail",true);
         }
     }
@@ -36,21 +34,21 @@ public class FollowBoss : MonoBehaviour
     }
 
     public void BossFollow(){
+        // Enemyler bossa koşması
         if(GameObject.Find("EnemyBoss").transform.GetChild(0).gameObject.active == true && transform.GetComponent<FollowBoss>().safeZoneActivated== false){
-            //transform.DOMove(GameObject.Find("EnemyBoss").transform.GetChild(0).transform.position,5);
-            //transform.LookAt(GameObject.Find("EnemyBoss").transform);
+            
             transform.GetComponent<Animator>().SetBool("enemyPlay",true);
             Debug.Log("Burada hareket var");
             agent.SetDestination(bossPosition.position);
             agent.speed = 10;
             agent.acceleration = 15;
             agent.angularSpeed = 120;
-            //transform.GetComponent<EnemyRandomMovement>().enabled = false;
+            
         }
         else if(transform.GetComponent<FollowBoss>().safeZoneActivated == true){
             transform.GetComponent<Animator>().SetBool("enemyPlay",false);
             transform.GetComponent<Rigidbody>().isKinematic = true;
-            //agent.SetDestination(transform.position);
+            
         }
     }
 
@@ -65,7 +63,7 @@ public class FollowBoss : MonoBehaviour
 
     private void OnTriggerStay(Collider other) {
         if(other.gameObject.tag == "safeZone"){
-            //DOVirtual.DelayedCall(0.5f,DestroyObjectFunction);
+            
         }
     }
 
@@ -75,7 +73,7 @@ public class FollowBoss : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other) {
          if(other.gameObject.tag == "boss"){
-            //Destroy(gameObject);
+           
         }
     }
 
@@ -88,7 +86,6 @@ public class FollowBoss : MonoBehaviour
             }
             GameObject.Find("EnemyBoss").transform.GetChild(0).transform.GetComponent<EnemyRandomMovement>().enabled = true;
             GameObject.Find("EnemyBoss").transform.GetChild(0).transform.GetComponent<Animator>().SetBool("fight",true);
-            //GameObject.Find("EnemyBoss").transform.GetChild(0).transform.GetComponent<NavMeshAgent>().SetDestination(GameManager.instance.player.transform.position);
             GameObject.Find("EnemyBoss").transform.GetChild(0).transform.LookAt(GameManager.instance.player.transform);
         }
     }
