@@ -25,15 +25,14 @@ public class FieldOfView : MonoBehaviour
     
     [NonSerialized] public Transform ClosestTarget;
 
-    //private Soldier _soldier;
+  
 	private Mesh _viewMesh;
 
     private void Start() {
         _viewMesh = new Mesh ();
 		_viewMesh.name = "View Mesh";
 		ViewMeshFilter.mesh = _viewMesh;
-        //GameManager.instance.enemyMaterial = ClosestTarget.GetComponent<Renderer>().material;
-        //_soldier = GetComponent<Soldier>();
+        
         
         StartCoroutine(FindTargetsWithDelay(0.2f));
     }
@@ -56,7 +55,7 @@ public class FieldOfView : MonoBehaviour
 
     private async void FindVisibleTargets() {
         ClosestTarget = null;
-    //soldier.Rem    oveTarget();
+    
 
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, ViewRadius, TargetMask);
 
@@ -67,34 +66,22 @@ public class FieldOfView : MonoBehaviour
                 float dstToTarget = Vector3.Distance(transform.position, target.position);
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, ObstacleMask)) {
                     if (ClosestTarget == null || dstToTarget < Vector3.Distance(transform.position, ClosestTarget.position)) {
-                        //ClosestTarget düşman oluyor
+                       
                         ClosestTarget = target;
                         GameManager.instance.gunFire.Play();
                         
-                        //ClosestTarget.transform.DOScale(0,2);
-                        //ClosestTarget.transform.DOMove(GameManager.instance.player.transform.localPosition,1f);
+                        
                         if(GameObject.Find("EnemyBoss").transform.GetChild(0).gameObject.active == false){
                         if(SliderBarSystem.instance.currentBarValue <100 && ClosestTarget.transform.gameObject.GetComponent<EnemyMovement>().myHealth < PlayerController.instance.playerMyHealth){
                             SliderBarSystem.instance.NegativeUseMoney(-10);//Vurduğum zaman canım artıyor
                         }
                         }
 
-                        //Karakterlerin hepsi düşmanı görünce ateş ediyor
-                        /*
-                        for(a = 0; a < 7; a++){
-                            GameManager.instance.friendGunFire[a].Play();
-                        }
-                        */
-                        //Karakterlerin hepsi düşmanı görünce ateş ediyor
-
-                        //ClosestTarget.GetComponent<Animator>().SetBool("fail",true);
-                        //ClosestTarget.GetComponent<EnemyFieldOfView>().enabled = false;
-
-                        //ClosestTarget.transform.GetChild(2).gameObject.SetActive(false);
+                       
 
                         ClosestTarget.transform.LookAt(GameManager.instance.player.transform);//Vurduğum adam burada direk bana dönüyor
 
-                        //PlayerController.instance.playerMyHealth ++;
+                       
 
                         if(GameObject.Find("EnemyBoss").transform.GetChild(0).gameObject.active == false){
                         if(PlayerController.instance.playerMyHealth + 1>=ClosestTarget.transform.GetComponent<EnemyMovement>().myHealth){
@@ -104,18 +91,13 @@ public class FieldOfView : MonoBehaviour
                         }
                         
 
-                        //ClosestTarget.transform.GetComponent<BossMovement>().bossMyHeath--;
+                        
                        
                         Debug.Log("Düşman");
 
                         TapticPlugin.TapticManager.Impact(ImpactFeedback.Heavy);//Düşamnı gördüğünde büyük bir titreşim etkili olacak
 
-                        //ClosestTarget.GetComponent<CapsuleCollider>().enabled = false;
-                        //ClosestTarget.GetComponent<Renderer>().material.DOColor(Color.blue,1); 
-                        //GameManager.instance.player.transform.DOPunchScale(new Vector3(GameManager.instance.player.transform.localScale.x,GameManager.instance.transform.localScale.y,GameManager.instance.transform.localScale.z),2);
-                        //ClosestTarget.transform.GetChild(1).GetComponent<SkinnedMeshRenderer>().material.DOColor(GameManager.instance.friendMaterial.color,3);
-
-                        //ClosestTarget.transform.DOScale(0,1).SetDelay(2).SetEase(Ease.Linear);//Vurduktan 2 saniye sonra küçülmeye başlıyor ve 1 saniyede küçülüyor
+                       
 
                         BossLevelSystem();
                         
